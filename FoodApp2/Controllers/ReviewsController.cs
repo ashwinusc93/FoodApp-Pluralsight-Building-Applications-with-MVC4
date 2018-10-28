@@ -102,7 +102,8 @@ namespace FoodApp2.Controllers
             {
                 id = 1,
                 Name ="Pizza Hut",
-                City = "Bangalore",
+                //City = "<script>alert('Bangalore');</script>",
+                City = "Bangalore", //Razor prevents XSS. Use @Html.Raw for displaying in unencoded form
                 Country = "India",
                 Rating = 8
             },
