@@ -2,19 +2,17 @@
 
 @{
     ViewBag.Title = "Latest Reviews";
-    //var firstReview = Model.First();
 }
-
-@* firstReview.Name  Variable in a Code Block *@
 
 <h2>@ViewBag.Title</h2>
 
-We are showing the latest @Model.Count() reviews
+@section featured {
+    We are showing the latest @Model.Count() reviews
+}
 
-@foreach(var item in Model)
+
+@foreach (var item in Model)
 {
-    // Code blocks can have both HTML and CSS
-    @:Review @* Literal Text *@
     <div class="review">
         <h4>@item.Name</h4>
         <span>@item.Rating</span>
