@@ -47,23 +47,22 @@ namespace FoodApp2.Controllers
         // GET: Reviews/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var review = _reviews.Single(r => r.id == id);
+            return View(review);
         }
 
         // POST: Reviews/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
+            var review = _reviews.Single(r => r.id == id);
+            //Model binding - Update every property
+            //Throws validation errors also
+            if(TryUpdateModel(review))
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(review);
         }
 
         // GET: Reviews/Delete/5
@@ -92,7 +91,7 @@ namespace FoodApp2.Controllers
         {
             new RestaurantReviewModel
             {
-                id = 1,
+                id = 0,
                 Name ="Dominos",
                 City = "Bangalore",
                 Country = "India",
@@ -109,7 +108,7 @@ namespace FoodApp2.Controllers
             },
             new RestaurantReviewModel
             {
-                id = 1,
+                id = 2,
                 Name ="Onesta",
                 City = "Bangalore",
                 Country = "India",
