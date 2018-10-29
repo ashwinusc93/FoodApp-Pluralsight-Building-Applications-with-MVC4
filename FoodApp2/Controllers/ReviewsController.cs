@@ -9,6 +9,12 @@ namespace FoodApp2.Controllers
 {
     public class ReviewsController : Controller
     {
+        [ChildActionOnly] // Cannot be called directly through URL
+        public ActionResult BestReview()
+        {
+            var bestReview = _reviews.OrderByDescending(r => r.Rating).Select(r => r);
+            return PartialView("_Review", bestReview.First());
+        }
         // GET: Reviews
         public ActionResult Index()
         {
