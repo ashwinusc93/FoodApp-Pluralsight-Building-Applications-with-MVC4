@@ -1,126 +1,31 @@
-﻿//using FoodApp2.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
-//using System.Web.Mvc;
+﻿using FoodApp2.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
-//namespace FoodApp2.Controllers
-//{
-//    public class ReviewsController : Controller
-//    {
-//        [ChildActionOnly] // Cannot be called directly through URL
-//        public ActionResult BestReview()
-//        {
-//            var bestReview = _reviews.OrderByDescending(r => r.Rating).Select(r => r);
-//            return PartialView("_Review", bestReview.First());
-//        }
-//        // GET: Reviews
-//        public ActionResult Index()
-//        {
-//            var model = _reviews.OrderBy(r => r.Country).Select(r => r);
-//            return View(model);
-//        }
+namespace FoodApp2.Controllers
+{
+    public class ReviewsController : Controller
+    {
+        OdeToFoodDb _db = new OdeToFoodDb();
+        
+        //Model Binder parameter aliasing, while looking for restaurantId with prefix id(Routing engine only knows id)
+        public ActionResult Index([Bind(Prefix="id")] int restaurantId)
+        {
+            var restaurant = _db.Restaurants.Find(restaurantId);
+            if(restaurant != null)
+            {
+                return View(restaurant);
+            }
+            return HttpNotFound();
+        }
 
-//        // GET: Reviews/Details/5
-//        public ActionResult Details(int id)
-//        {
-//            return View();
-//        }
-
-//        // GET: Reviews/Create
-//        public ActionResult Create()
-//        {
-//            return View();
-//        }
-
-//        // POST: Reviews/Create
-//        [HttpPost]
-//        public ActionResult Create(FormCollection collection)
-//        {
-//            try
-//            {
-//                // TODO: Add insert logic here
-
-//                return RedirectToAction("Index");
-//            }
-//            catch
-//            {
-//                return View();
-//            }
-//        }
-
-//        // GET: Reviews/Edit/5
-//        public ActionResult Edit(int id)
-//        {
-//            var review = _reviews.Single(r => r.id == id);
-//            return View(review);
-//        }
-
-//        // POST: Reviews/Edit/5
-//        [HttpPost]
-//        public ActionResult Edit(int id, FormCollection collection)
-//        {
-//            var review = _reviews.Single(r => r.id == id);
-//            //Model binding - Update every property
-//            //Throws validation errors also
-//            if(TryUpdateModel(review))
-//            {
-//                return RedirectToAction("Index");
-//            }
-//            return View(review);
-//        }
-
-//        // GET: Reviews/Delete/5
-//        public ActionResult Delete(int id)
-//        {
-//            return View();
-//        }
-
-//        // POST: Reviews/Delete/5
-//        [HttpPost]
-//        public ActionResult Delete(int id, FormCollection collection)
-//        {
-//            try
-//            {
-//                // TODO: Add delete logic here
-
-//                return RedirectToAction("Index");
-//            }
-//            catch
-//            {
-//                return View();
-//            }
-//        }
-//        // Only for demo purpose in Module 4
-//        static List<RestaurantReviewModel> _reviews = new List<RestaurantReviewModel>
-//        {
-//            new RestaurantReviewModel
-//            {
-//                id = 0,
-//                Name ="Dominos",
-//                City = "Bangalore",
-//                Country = "India",
-//                Rating = 9
-//            },
-//            new RestaurantReviewModel
-//            {
-//                id = 1,
-//                Name ="Pizza Hut",
-//                //City = "<script>alert('Bangalore');</script>",
-//                City = "Bangalore", //Razor prevents XSS. Use @Html.Raw for displaying in unencoded form
-//                Country = "India",
-//                Rating = 8
-//            },
-//            new RestaurantReviewModel
-//            {
-//                id = 2,
-//                Name ="Onesta",
-//                City = "Bangalore",
-//                Country = "India",
-//                Rating = 6
-//            },
-//        };
-
-//    }
-//}
+        protected override void Dispose(bool disposing)
+        {
+            _db.Dispose();
+            base.Dispose(disposing);
+        }
+    }
+}

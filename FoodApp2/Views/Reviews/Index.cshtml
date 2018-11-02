@@ -1,0 +1,15 @@
+﻿@model FoodApp2.Models.Restaurant
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reviews for @Model.Name</h2>
+
+@*Partial View to display the reviews for a particular restaurant *@
+@Html.Partial("_Reviews", @Model.Reviews)
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+

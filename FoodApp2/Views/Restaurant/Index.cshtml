@@ -35,8 +35,9 @@
             @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
+            <!-- Removed Details Action Link so that we can see reviews of the restaurant instead of details about it. -->
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Reviews", "Index", "Reviews", new { id=item.id }, null) |
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>

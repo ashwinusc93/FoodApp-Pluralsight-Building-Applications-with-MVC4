@@ -11,6 +11,7 @@ namespace FoodApp2.Models
         public string Name { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<RestaurantReviewModel> Reviews { get; set; }
+        // One to Many relationship. Load muliple reviews for one restaurant
+        public virtual ICollection<RestaurantReviewModel> Reviews { get; set; }
     }
 }
