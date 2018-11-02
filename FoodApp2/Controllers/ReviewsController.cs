@@ -28,10 +28,11 @@ namespace FoodApp2.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            _db.Dispose();
-            base.Dispose(disposing);
+            var model = _db.Reviews.Find(id);
+            return View(model);
         }
 
         [HttpPost]
@@ -40,6 +41,25 @@ namespace FoodApp2.Controllers
             if (ModelState.IsValid)
             {
                 _db.Reviews.Add(review);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = review.RestaurantId });
+            }
+            return View(review);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _db.Dispose();
+            base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(RestaurantReviewModel review)
+        {
+            if (ModelState.IsValid)
+            {
+                //Do not insert new record into DB. Update existing record. 
+                _db.Entry(review).State = System.Data.Entity.EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index", new { id = review.RestaurantId });
             }
