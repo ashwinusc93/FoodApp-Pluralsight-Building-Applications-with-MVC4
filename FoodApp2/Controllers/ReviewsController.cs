@@ -54,7 +54,8 @@ namespace FoodApp2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(RestaurantReviewModel review)
+        //Exclude -> Prevent erroneous POST requests from editing the model (Mass assignment/Overposting)
+        public ActionResult Edit([Bind(Exclude = "ReviewerName")] RestaurantReviewModel review)
         {
             if (ModelState.IsValid)
             {
