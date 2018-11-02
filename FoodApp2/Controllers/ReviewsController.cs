@@ -22,10 +22,28 @@ namespace FoodApp2.Controllers
             return HttpNotFound();
         }
 
+        [HttpGet]
+        public ActionResult Create(int restaurantId)
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             _db.Dispose();
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Create(RestaurantReviewModel review)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Reviews.Add(review);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = review.RestaurantId });
+            }
+            return View(review);
         }
     }
 }

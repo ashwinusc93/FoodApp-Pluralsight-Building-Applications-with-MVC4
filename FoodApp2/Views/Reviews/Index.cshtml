@@ -10,6 +10,6 @@
 @Html.Partial("_Reviews", @Model.Reviews)
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { restaurantId = Model.id })
 </p>
 
