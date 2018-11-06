@@ -27,6 +27,11 @@ namespace FoodApp2.Migrations
                     Country = "IN",
                     Reviews = new List<RestaurantReviewModel> { new RestaurantReviewModel { Rating = 7, Body = "Good Pizza", ReviewerName = "Ashwin" } }
                 });
+
+            for(int res = 0; res < 100; res++)
+            {
+                context.Restaurants.AddOrUpdate(r => r.Name, new Restaurant { Name = res.ToString(), City = "SF", Country = "USA" });
+            }
         }
     }
 }

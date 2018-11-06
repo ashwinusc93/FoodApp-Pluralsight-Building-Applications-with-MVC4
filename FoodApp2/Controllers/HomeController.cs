@@ -17,6 +17,11 @@ namespace FoodApp2.Controllers
                 .Take(10)
                 .Select(r => new RestaurantListViewModel { id = r.id, Name = r.Name, City = r.City, Country = r.Country, CountOfReviews = r.Reviews.Count() } );
 
+            if(Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
+
             return View(model);
         }
 

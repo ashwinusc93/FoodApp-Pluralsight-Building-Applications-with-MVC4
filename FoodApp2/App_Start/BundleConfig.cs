@@ -8,6 +8,12 @@ namespace FoodApp2
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/otf").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/jquery-ui.js"
+                        ));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -25,6 +31,10 @@ namespace FoodApp2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeDirectory(
+                    "~/Content/jqueryUi", "*.css", true
+                ));
         }
     }
 }
