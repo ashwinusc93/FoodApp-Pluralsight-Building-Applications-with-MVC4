@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FoodApp2.Models.RestaurantListViewModel>
+﻿@model IPagedList<RestaurantListViewModel>
 
 @{
     ViewBag.Title = "Restaurants";
@@ -25,7 +25,7 @@
 } *@ 
 
 <form method="get" action="@Url.Action("Index")" data-otf-ajax="true" data-otf-target="#restaurantList">
-    <input type="search" name="searchterm" />
+    <input type="search" name="searchterm" data-otf-autocomplete="@Url.Action("AutoComplete")" />
     <input type="submit" value="Search By Name" />
 </form>
 
