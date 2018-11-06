@@ -11,7 +11,8 @@ namespace FoodApp2
             bundles.Add(new ScriptBundle("~/bundles/otf").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.validate*",
-                        "~/Scripts/jquery-ui.js"
+                        "~/Scripts/jquery-ui.js",
+                        "~/Scripts/otf.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
