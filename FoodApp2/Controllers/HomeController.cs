@@ -36,7 +36,7 @@ namespace FoodApp2.Controllers
 
             return View(model);
         }
-
+        [Authorize(Roles ="Administrator")]
         public ActionResult About()
         {
             var model = new AboutModel();
@@ -45,7 +45,7 @@ namespace FoodApp2.Controllers
 
             return View(model);
         }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
