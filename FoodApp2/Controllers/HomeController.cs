@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using PagedList;
 
 namespace FoodApp2.Controllers
@@ -23,14 +24,14 @@ namespace FoodApp2.Controllers
         }
 
         //Demo of caching for Child actions
-        [ChildActionOnly]
+        /*[ChildActionOnly]
         [OutputCache(Duration = 60)]
         public ActionResult SayHello()
         {
             return Content("Hello");
-        }
+        }*/
 
-        [OutputCache(Duration = 5)]
+        [OutputCache(Duration = 360, VaryByHeader = "X-Requested-With", Location = OutputCacheLocation.Server)]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
             var model = _db.Restaurants.OrderByDescending(r => r.Reviews.Average(review => review.Rating))
