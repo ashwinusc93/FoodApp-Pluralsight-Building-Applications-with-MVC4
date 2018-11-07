@@ -29,6 +29,21 @@
     <input type="submit" value="Search By Name" />
 </form>
 
+@{ 
+    var amount = 10.0m;
+    var someDate = new DateTime(2018, 11, 07);
+}
+
+<div>
+    @FoodApp2.Views.Home.Resources.Greeting
+</div>
+<div>
+    @amount.ToString("c")
+</div>
+<div>
+    @someDate.ToShortDateString()
+</div>
+
 @* Html.Action("SayHello") *@ @* Caching of child action demo*@
 
 @Html.Partial("_Restaurants", Model)

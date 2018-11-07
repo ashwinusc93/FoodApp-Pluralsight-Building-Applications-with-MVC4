@@ -39,7 +39,7 @@ namespace FoodApp2.Models
         [Display(Name = "Reviewer Name")]
         [DisplayFormat(NullDisplayText = "anonymous")]
         public string ReviewerName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(FoodApp2.Views.Home.Resources), ErrorMessageResourceName ="Greeting")]
         [StringLength(1024)]
         public string Body { get; set; }
         public int RestaurantId { get; set; }
