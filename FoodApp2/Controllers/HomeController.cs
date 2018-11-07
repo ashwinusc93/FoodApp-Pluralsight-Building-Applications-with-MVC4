@@ -21,6 +21,16 @@ namespace FoodApp2.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        //Demo of caching for Child actions
+        [ChildActionOnly]
+        [OutputCache(Duration = 60)]
+        public ActionResult SayHello()
+        {
+            return Content("Hello");
+        }
+
+        [OutputCache(Duration = 5)]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
             var model = _db.Restaurants.OrderByDescending(r => r.Reviews.Average(review => review.Rating))
